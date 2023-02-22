@@ -6,7 +6,7 @@ service / on httpListener {
 
     resource function get hello(http:Request request) returns http:Response|error {
         
-        string[] headers = check request.getHeaderNames();
+        string[] headers = request.getHeaderNames();
 
         boolean found=false;
 
@@ -23,10 +23,8 @@ service / on httpListener {
             string token=check  request.getHeader("Token");
 
             if (token!= "" ){
-                if (token!= "" ){
-                    
                     // Construct the redirect URL.
-                    string redirectUrl = "http://localhost:8080/hello";
+                    string redirectUrl = "http://localhost:8080/authorized";
                     
                     // Create an HTTP response with a "302 Found" status code and the redirect URL in the "Location" header.
                     
@@ -35,7 +33,6 @@ service / on httpListener {
 
                     // Send the HTTP response back to the client, causing the browser to redirect to the specified URL.
                     //_ = caller->respond(response);
-                }
             }
             else{
                 // Create a response and populate the headers/payload.
